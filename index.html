@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+	   <meta charset="utf-8">
+	   <title>Print text on labels</title>
+	   <link rel='stylesheet' type='text/css' href = 'style.css'></>
+	   <script src="jquery.js"></script>
+     <script src ="select_printers.js"></script>
+	   <script src ="print_job.js"></script>
+     <script src ="print.js"></script>
+  </head>
+
+  <body>
+
+    <form>
+      <div>
+        <label for="txt">Text:</label>
+        <input type="text" id="text" name="text" />
+      </div>
+      <div>
+        <label for="from">from:</label>
+        <input type="text" id="from" name="from" />
+      </div>
+      <div>
+        <label for="to">to:</label>
+        <input type="text" id="to" name="to" />
+      </div>
+      <div>
+        <label for="printers">Labels for:</label>
+        <select name="type" id="type">
+          <option value="plate">plates</option>
+          <option value="tube">tubes</option>
+        </select>
+      </div>
+      <div>
+        <label for="printer_name">Printer:</label>
+        <select name="printer_name" id="printer_name"></select>
+      </div>
+      <div class="button">
+        <button id="print" type="submit">Print!</button>
+      </div>
+
+    </form>
+
+
+
+  </body>
+  </html>
