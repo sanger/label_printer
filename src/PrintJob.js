@@ -1,8 +1,8 @@
 
 PrintJob = function(data){
 	this.baseUrl = 'http://localhost:8080/pmb/';
-  this.startNum = data['from'];
-  this.endNum = data['to'];
+  this.from = data['from'];
+  this.to = data['to'];
   this.text = data['text'];
   this.type = data['type'];
   this.printer_name = data['printer_name'];
@@ -32,7 +32,7 @@ PrintJob.prototype.label = function(number){
 
 PrintJob.prototype.labels = function(){
 	var result  = new Array();
-	for (i = this.startNum; i <= this.endNum; i++) {
+	for (i = this.from; i <= this.to; i++) {
 	  label = this.label(String(i));
 	  result.push(label)
 	}
@@ -54,22 +54,31 @@ PrintJob.prototype.headers=function(){
 					"Content-Type": "application/vnd.api+json"}
 };
 
+PrintJob.prototype.execute=function(){
+  $.ajax({
+    url : this.labelTemplateUrl(),
+    type : 'GET',
+    success: this.print.bind(this),
+    error: handleErrors
+  })
+}
+
 PrintJob.prototype.print = function(data){
-	label_template_id = data['data'][0]['id']
-
+  console.log(data)
+	var label_template_id = data['data'][0]['id']
 	var attributes = this.attributes(label_template_id)
-
 		request = $.ajax({
 			headers: this.headers(),
 			url : this.printUrl(),
 			type : 'POST',
 			dataType: 'json',
-			data: JSON.stringify(attributes)
+			data: JSON.stringify(attributes),
+      success: this.success,
+      error: handleErrors
 		})
-      .done(function(data) {
+};
 
-          console.log(data);
-
-          // validations and errors
-      });
-}
+PrintJob.prototype.success = function(data){
+  console.log('success')
+  $('.result').text('Your labels were printed')
+};

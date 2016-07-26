@@ -1,17 +1,19 @@
 <!DOCTYPE html>
   <html>
   <head>
-	   <meta charset="utf-8">
-	   <title>Print text on labels</title>
-	   <link rel='stylesheet' type='text/css' href = 'style.css'></>
-	   <script src="jquery.js"></script>
-     <script src ="select_printers.js"></script>
-	   <script src ="print_job.js"></script>
-     <script src ="print.js"></script>
+    <meta charset="utf-8">
+    <title>Print text on labels</title>
+    <link rel='stylesheet' type='text/css' href = 'style.css'></>
+    <script src="lib/jquery.js"></script>
+    <script src ="src/HandleErrors.js"></script>
+    <script src ="src/PrepareForm.js"></script>
+    <script src ="src/PrintJob.js"></script>
+    <script src ="print.js"></script>
   </head>
 
   <body>
 
+    <div class='result'></div>
     <form>
       <div>
         <label for="txt">Text:</label>
