@@ -1,6 +1,5 @@
 
 PrintJob = function(data){
-	this.baseUrl = 'http://localhost:8080/pmb/';
   this.from = data['from'];
   this.to = data['to'];
   this.text = data['text'];
@@ -41,12 +40,12 @@ PrintJob.prototype.labels = function(){
 
 PrintJob.prototype.labelTemplateUrl=function(){
 	var label_template_name = 'multiple_labels_walk_up_' + this.type
-	var label_template_url = this.baseUrl+'label_templates?filter[name]=' + label_template_name
+	var label_template_url = baseUrl()+'label_templates?filter[name]=' + label_template_name
 	return label_template_url
 };
 
 PrintJob.prototype.printUrl=function(){
-	return this.baseUrl + 'print_jobs'
+	return baseUrl() + 'print_jobs'
 };
 
 PrintJob.prototype.headers=function(){

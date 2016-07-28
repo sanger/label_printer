@@ -6,13 +6,13 @@ var addPrinters = function(data){
     printers_names.push(name)
   }
   $.each(printers_names, function(val, text) {
-    $('#printer_name').append( $('<option></option>').val(text).html(text) )
+    $('#printer_name').append( $('<option></option>').attr('id', text).html(text) )
   });
 };
 
 var getPrinters = function(){
   $.ajax({
-    url : 'http://localhost:8080/pmb/printers',
+    url : baseUrl() + 'printers',
     type : 'GET',
     success: addPrinters,
     error: showErrors

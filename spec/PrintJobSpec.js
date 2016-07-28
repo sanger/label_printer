@@ -1,6 +1,6 @@
 describe("PrintJob", function() {
-  var printJob;
-  var label, labels, attributes;
+  var data, printJob;
+  var label, labels, result, attributes;
 
   beforeEach(function() {
     data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test'}
@@ -76,7 +76,7 @@ describe("PrintJob", function() {
         }
       };
 
-      url = printJob.baseUrl + 'label_templates?filter[name]=multiple_labels_walk_up_plate'
+      url = baseUrl() + 'label_templates?filter[name]=multiple_labels_walk_up_plate'
     });
 
     afterEach(function() {
@@ -85,7 +85,7 @@ describe("PrintJob", function() {
 
     it("should print if success", function(){
 
-      spyOn(printJob, 'print').and.callThrough();
+      spyOn(printJob, 'print');
       printJob.execute();
 
       request = jasmine.Ajax.requests.mostRecent();
@@ -97,8 +97,8 @@ describe("PrintJob", function() {
     });
     it("should handle errors if error", function(){
 
-      spyOn(printJob, 'print').and.callThrough();
-      spyOn(window, 'showErrors').and.callThrough();
+      spyOn(printJob, 'print');
+      spyOn(window, 'showErrors');
 
       printJob.execute();
 
@@ -133,7 +133,7 @@ describe("PrintJob", function() {
 
       data = {"data":[{ "id": "1"}]}
 
-      url = printJob.baseUrl + 'print_jobs'
+      url = baseUrl() + 'print_jobs'
     });
 
     afterEach(function() {
@@ -142,7 +142,7 @@ describe("PrintJob", function() {
 
     it("should call success if success", function(){
 
-      spyOn(printJob, 'success').and.callThrough();
+      spyOn(printJob, 'success');
       printJob.print(data);
 
       request = jasmine.Ajax.requests.mostRecent();
@@ -155,8 +155,8 @@ describe("PrintJob", function() {
 
     it("should handle errors if error", function(){
 
-      spyOn(printJob, 'success').and.callThrough();
-      spyOn(window, 'showErrors').and.callThrough();
+      spyOn(printJob, 'success');
+      spyOn(window, 'showErrors');
 
       printJob.print(data);
 

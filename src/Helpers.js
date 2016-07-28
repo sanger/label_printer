@@ -1,7 +1,15 @@
 var toObject = function(array){
-  var formData = new Object;
+  var result = new Object;
   for (i = 0; i < array.length; i++) {
-    formData[array[i]['name']] = array[i]['value']
+    result[array[i]['name']] = array[i]['value']
   }
-  return formData
+  return result
+}
+
+var baseUrl = function(){
+  return 'http://localhost:8080/pmb/'
+}
+
+var refreshResult = function(){
+  $('.result').removeAttr('id').text('.')
 }

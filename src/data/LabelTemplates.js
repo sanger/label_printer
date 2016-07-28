@@ -29,7 +29,7 @@
 			"labels_attributes":[
 				{"name": "main_label",
 					"bitmaps_attributes" : [
-						{"x_origin":"0200", "y_origin":"0050", "field_name":"middle_line", "horizontal_magnification":"05", "vertical_magnification":"1", "font":"G", "space_adjustment":"00", "rotational_angles":"00"}
+						{"x_origin":"0030", "y_origin":"0050", "field_name":"middle_line", "horizontal_magnification":"05", "vertical_magnification":"1", "font":"G", "space_adjustment":"00", "rotational_angles":"00"}
 					]
    			}
    		]
