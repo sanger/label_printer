@@ -1,4 +1,18 @@
 
+//label_type for tubes
+
+{"data":
+  {"attributes":
+    {"name":"Tube",
+      "feed_value":"008",
+      "fine_adjustment":"22",
+      "pitch_length":"0430",
+      "print_width":"0300",
+      "print_length":"0400"
+    }
+  }
+}
+
 //label template for tubes
 //check label_type_id
 
@@ -18,6 +32,19 @@
   }
 }
 
+//label_type for plates
+
+{"data" =>
+  {"attributes" =>
+    {"name" => "Plate",
+      "feed_value" => "008",
+      "fine_adjustment" => "04",
+      "pitch_length" => "0110",
+      "print_width" => "0920",
+      "print_length" => "0080"
+    }
+  }
+}
 
 //label template plate
 //check label_type_id

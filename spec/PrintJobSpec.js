@@ -169,7 +169,7 @@ describe("PrintJob", function() {
     });
   });
 
-  it("should add id and text to the right element", function(){
+  it("success should add id and text to the right element", function(){
     loadFixtures( 'AppFixture.html');
     printJob.success();
     expect($('.result')).toHaveText("Your labels have been sent to printer");

@@ -1,0 +1,13 @@
+
+
+nginx was installed by default in ~/homebrew/etc/nginx
+file nginx.conf was there, I added lines 37-49
+if it is in another folder, root (line 41) should be changed
+to start nginx run `nginx`, it runs on http://localhost:8080/
+
+start pmb on http://localhost:9292
+
+label templates and label types are in file 'LabelTemplates'
+
+to run tests open http://localhost:8080/SpecRunner.html
+
