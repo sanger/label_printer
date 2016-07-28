@@ -13,7 +13,7 @@ PrintJob.prototype.attributes = function(label_template_id){
 };
 
 PrintJob.prototype.labelTube = function(number){
-	return	{"main_label": {"middle_line": this.text + " " + number, "round_label": number}}
+	return	{"main_label": {"middle_line": this.text + " " + number, "round_label": number.toString()}}
 };
 
 PrintJob.prototype.labelPlate = function(number){
@@ -59,12 +59,11 @@ PrintJob.prototype.execute=function(){
     url : this.labelTemplateUrl(),
     type : 'GET',
     success: this.print.bind(this),
-    error: handleErrors
+    error: showErrors
   })
 }
 
 PrintJob.prototype.print = function(data){
-  console.log(data)
 	var label_template_id = data['data'][0]['id']
 	var attributes = this.attributes(label_template_id)
 		request = $.ajax({
@@ -74,11 +73,10 @@ PrintJob.prototype.print = function(data){
 			dataType: 'json',
 			data: JSON.stringify(attributes),
       success: this.success,
-      error: handleErrors
+      error: showErrors
 		})
 };
 
 PrintJob.prototype.success = function(data){
-  console.log('success')
-  $('.result').text('Your labels were printed')
+  $('.result').attr('id', 'success').text('Your labels have been sent to printer')
 };

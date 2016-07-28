@@ -1,6 +1,6 @@
-handleErrors = function(data){
+showErrors = function(data){
   var text = errorText(data);
-  $('.result').text(text);
+  $('.result').attr('id', 'error').text(text);
 };
 
 errorText = function(data){

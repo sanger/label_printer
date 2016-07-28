@@ -1,7 +1,6 @@
 describe("PrintJob", function() {
   var printJob;
-  var label;
-  var labels;
+  var label, labels, attributes;
 
   beforeEach(function() {
     data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test'}
@@ -16,9 +15,15 @@ describe("PrintJob", function() {
     expect(printJob.printer_name).toEqual('test');
   });
 
-  it("should create the right label", function(){
+  it("should create the right label for plate", function(){
     label = printJob.label(1);
     expect(label).toEqual({"main_label": {"middle_line": 'some_text 1'}});
+  });
+
+  it("should create the right label for tube", function(){
+    printJob.type = 'tube'
+    label = printJob.label(1);
+    expect(label).toEqual({"main_label": {"middle_line": 'some_text 1', "round_label" : '1'}});
   });
 
   it("should create the right labels", function(){
@@ -32,7 +37,26 @@ describe("PrintJob", function() {
     expect(labels).toEqual(result);
   });
 
-  describe('execute job', function(){
+  it("should create the right attributes", function(){
+    attributes = printJob.attributes(5);
+    result = {"data":
+                {"attributes":
+                  {"printer_name" : 'test',
+                  "label_template_id" : 5,
+                  "labels" :
+                    {'body':
+                      [{ 'main_label': { 'middle_line': 'some_text 1' }},
+                       { 'main_label': { 'middle_line': 'some_text 2' }},
+                       { 'main_label': { 'middle_line': 'some_text 3' }}
+                      ]
+                    }
+                  }
+                }
+              }
+    expect(attributes).toEqual(result);
+  });
+
+  describe('execute', function(){
     var request, url, testResponses;
     var success, error;
 
@@ -59,9 +83,9 @@ describe("PrintJob", function() {
       jasmine.Ajax.uninstall();
     });
 
-    it("should execute the job if success", function(){
+    it("should print if success", function(){
 
-      spyOn(printJob, 'print');
+      spyOn(printJob, 'print').and.callThrough();
       printJob.execute();
 
       request = jasmine.Ajax.requests.mostRecent();
@@ -73,8 +97,8 @@ describe("PrintJob", function() {
     });
     it("should handle errors if error", function(){
 
-      spyOn(printJob, 'print');
-      handleErrors = jasmine.createSpy();
+      spyOn(printJob, 'print').and.callThrough();
+      spyOn(window, 'showErrors').and.callThrough();
 
       printJob.execute();
 
@@ -83,7 +107,72 @@ describe("PrintJob", function() {
 
       request.respondWith(testResponses.execute.error);
       expect(printJob.print).not.toHaveBeenCalled();
-      expect(handleErrors).toHaveBeenCalled();
+      expect(showErrors).toHaveBeenCalled();
     });
+  });
+
+  describe('print', function(){
+    var request, url, testResponses, data;
+    var success, error;
+
+    beforeEach(function() {
+      jasmine.Ajax.install();
+
+      testResponses = {
+        execute: {
+          success: {
+            status: 200,
+            responseText: '{}'
+          },
+          error:{
+            status: 502,
+            responseText: '{}'
+          }
+        }
+      };
+
+      data = {"data":[{ "id": "1"}]}
+
+      url = printJob.baseUrl + 'print_jobs'
+    });
+
+    afterEach(function() {
+      jasmine.Ajax.uninstall();
+    });
+
+    it("should call success if success", function(){
+
+      spyOn(printJob, 'success').and.callThrough();
+      printJob.print(data);
+
+      request = jasmine.Ajax.requests.mostRecent();
+      expect(request.url).toBe(url);
+
+      request.respondWith(testResponses.execute.success);
+      expect(printJob.success).toHaveBeenCalled();
+
+    });
+
+    it("should handle errors if error", function(){
+
+      spyOn(printJob, 'success').and.callThrough();
+      spyOn(window, 'showErrors').and.callThrough();
+
+      printJob.print(data);
+
+      request = jasmine.Ajax.requests.mostRecent();
+      expect(request.url).toBe(url);
+
+      request.respondWith(testResponses.execute.error);
+      expect(printJob.success).not.toHaveBeenCalled();
+      expect(showErrors).toHaveBeenCalled();
+    });
+  });
+
+  it("should add id and text to the right element", function(){
+    loadFixtures( 'AppFixture.html');
+    printJob.success();
+    expect($('.result')).toHaveText("Your labels have been sent to printer");
+    expect($('.result')).toHaveAttr( 'id', 'success' )
   });
 });

@@ -1,10 +1,11 @@
 
 //label template for tubes
+//check label_type_id
 
 {"data":
 	{"attributes":
 		{"name":"multiple_labels_walk_up_tube",
-			"label_type_id": 4,
+			"label_type_id": 9,
 			"labels_attributes":[
 				{"name": "main_label",
 					"bitmaps_attributes": [
@@ -19,11 +20,12 @@
 
 
 //label template plate
+//check label_type_id
 
 {"data":
 	{"attributes":
 		{"name":"multiple_labels_walk_up_plate",
-			"label_type_id": 1,
+			"label_type_id": 8,
 			"labels_attributes":[
 				{"name": "main_label",
 					"bitmaps_attributes" : [
