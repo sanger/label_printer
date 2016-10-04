@@ -3,9 +3,12 @@ $(document).ready(function() {
 
   getPrinters()
 
+  $('#barcode').keyup(removeFromAndTo)
+
   $('form').submit(function(event) {
     refreshResult();
-    var printJob = new PrintJob(toObject($(this).serializeArray()));
+    formData = toObject($(this).serializeArray())
+    var printJob = new PrintJob(formData);
     printJob.execute();
     event.preventDefault();
   });

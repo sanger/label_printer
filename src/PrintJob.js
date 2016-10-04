@@ -5,6 +5,7 @@ PrintJob = function(data){
   this.text = data['text'];
   this.type = data['type'];
   this.printer_name = data['printer_name'];
+  this.barcode = data['barcode'];
 };
 
 PrintJob.prototype.attributes = function(label_template_id){
@@ -12,11 +13,11 @@ PrintJob.prototype.attributes = function(label_template_id){
 };
 
 PrintJob.prototype.labelTube = function(number){
-	return	{"main_label": {"middle_line": this.text + " " + number, "round_label": number.toString()}}
+	return	{"main_label": {"middle_line": this.text + " " + number, "round_label": number.toString(), "barcode": this.barcode}}
 };
 
 PrintJob.prototype.labelPlate = function(number){
-	return	{"main_label": {"middle_line": this.text + " " + number}}
+	return  {"main_label": {"middle_line": this.text + " " + number, "barcode": this.barcode}}
 };
 
 PrintJob.prototype.label = function(number){

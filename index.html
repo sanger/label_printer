@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Print text on labels</title>
+    <link rel='stylesheet' type='text/css' href = 'normalize.css'></>
     <link rel='stylesheet' type='text/css' href = 'style.css'></>
     <script src="lib/jquery.js"></script>
     <script src ="src/Helpers.js"></script>
@@ -15,10 +16,22 @@
   <body>
 
     <form >
+      <h3>Label printer</h3>
       <div class='result'></div>
+      <div>
+        <label for="printers">Labels for:</label>
+        <select name="type" id="type">
+          <option value="plate">plates</option>
+          <option value="tube">tubes</option>
+        </select>
+      </div>
       <div>
         <label for="txt">Text:</label>
         <input type="text" id="text" name="text" required />
+      </div>
+      <div>
+        <label for="barcode">Barcode:</label>
+        <input type="text" id="barcode" name="barcode" />
       </div>
       <div>
         <label for="from">from:</label>
@@ -28,13 +41,7 @@
         <label for="to">to:</label>
         <input type="number" id="to" name="to" />
       </div>
-      <div>
-        <label for="printers">Labels for:</label>
-        <select name="type" id="type">
-          <option value="plate">plates</option>
-          <option value="tube">tubes</option>
-        </select>
-      </div>
+
       <div>
         <label for="printer_name">Printer:</label>
         <select name="printer_name" id="printer_name"></select>

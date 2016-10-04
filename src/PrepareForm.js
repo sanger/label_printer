@@ -18,3 +18,13 @@ var getPrinters = function(){
     error: showErrors
   })
 };
+
+var removeFromAndTo = function(){
+  if($(this).val().length ==0){
+    $('#to').show();
+    $('#from').show();
+  } else {
+    $('#from').hide().val('');
+    $('#to').hide().val('');
+  };
+}
