@@ -5,6 +5,8 @@ $(document).ready(function() {
 
   $('#barcode').keyup(removeFromAndTo)
 
+  $('#type').change(disableCheckboxIfTube);
+
   $('form').submit(function(event) {
     refreshResult();
     formData = toObject($(this).serializeArray())

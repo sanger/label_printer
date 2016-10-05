@@ -28,3 +28,7 @@ var removeFromAndTo = function(){
     $('#to').hide().val('');
   };
 }
+
+var disableCheckboxIfTube = function () {
+    $('#cbox').prop('disabled', this.value == 'tube').prop('checked', false);
+  }

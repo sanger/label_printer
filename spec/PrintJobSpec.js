@@ -13,6 +13,13 @@ describe("PrintJob", function() {
     expect(printJob.to).toEqual('3');
     expect(printJob.text).toEqual('some_text');
     expect(printJob.printer_name).toEqual('test');
+    expect(printJob.size).toEqual('');
+  });
+
+  it("should have the right size attribute for small label", function(){
+    data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test', 'barcode': '', 'size': 'small'}
+    printJob = new PrintJob(data);
+    expect(printJob.size).toEqual('_small');
   });
 
   it("should create the right label for plate", function(){

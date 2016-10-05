@@ -6,6 +6,7 @@ PrintJob = function(data){
   this.type = data['type'];
   this.printer_name = data['printer_name'];
   this.barcode = data['barcode'];
+  this.size = (typeof data['size'] === 'undefined') ? '' : ('_' + data['size']);
 };
 
 PrintJob.prototype.attributes = function(label_template_id){
@@ -40,7 +41,7 @@ PrintJob.prototype.labels = function(){
 };
 
 PrintJob.prototype.labelTemplateUrl=function(){
-	var label_template_name = 'multiple_labels_walk_up_' + this.type
+	var label_template_name = 'multiple_labels_walk_up_' + this.type + this.size
 	var label_template_url = baseUrl()+'label_templates?filter[name]=' + label_template_name
 	return label_template_url
 };
