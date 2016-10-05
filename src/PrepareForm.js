@@ -21,14 +21,19 @@ var getPrinters = function(){
 
 var removeFromAndTo = function(){
   if($(this).val().length ==0){
-    $('#to').show();
+    $("label[for='from']").show();
     $('#from').show();
+    $("label[for='to']").show();
+    $('#to').show();
   } else {
+    $("label[for='from']").hide();
     $('#from').hide().val('');
+    $("label[for='to']").hide();
     $('#to').hide().val('');
   };
 }
 
 var disableCheckboxIfTube = function () {
-    $('#cbox').prop('disabled', this.value == 'tube').prop('checked', false);
+    $("label[for='size']").prop('hidden', this.value == 'tube');
+    $('#cbox').prop('hidden', this.value == 'tube').prop('checked', false);
   }
