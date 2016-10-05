@@ -76,3 +76,7 @@ select {
   background-color: #ffcccc;
   color: #800000;
 }
+
+#cbox {
+    width: 30px;
+}
