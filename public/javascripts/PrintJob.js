@@ -13,37 +13,31 @@ PrintJob.prototype.attributes = function(label_template_id){
 	return {"data":{"attributes":{"printer_name" : this.printer_name, "label_template_id" : label_template_id, "labels" : this.labels()}}}
 };
 
+PrintJob.prototype.labels = function(){
+  var result  = new Array();
+  for (i = this.from; i <= this.to; i++) {
+    label = this.label(String(i));
+    result.push(label)
+  }
+  return {"body" : result}
+};
+
+PrintJob.prototype.label = function(number){
+  switch (this.type) {
+    case 'plate':
+      return this.labelPlate(number);
+      break;
+    case 'tube':
+      return this.labelTube(number);
+  }
+};
+
 PrintJob.prototype.labelTube = function(number){
 	return	{"main_label": {"middle_line": this.text + " " + number, "round_label": number.toString(), "barcode": this.barcode}}
 };
 
 PrintJob.prototype.labelPlate = function(number){
 	return  {"main_label": {"middle_line": this.text + " " + number, "barcode": this.barcode}}
-};
-
-PrintJob.prototype.label = function(number){
-	switch (this.type) {
-		case 'plate':
-			return this.labelPlate(number);
-			break;
-		case 'tube':
-			return this.labelTube(number);
-	}
-};
-
-PrintJob.prototype.labels = function(){
-	var result  = new Array();
-	for (i = this.from; i <= this.to; i++) {
-	  label = this.label(String(i));
-	  result.push(label)
-	}
-	return {"body" : result}
-};
-
-PrintJob.prototype.labelTemplateUrl=function(){
-	var label_template_name = 'multiple_labels_walk_up_' + this.type + this.size
-	var label_template_url = baseUrl()+'label_templates?filter[name]=' + label_template_name
-	return label_template_url
 };
 
 PrintJob.prototype.printUrl=function(){
@@ -63,6 +57,12 @@ PrintJob.prototype.execute=function(){
     error: showErrors
   })
 }
+
+PrintJob.prototype.labelTemplateUrl=function(){
+  var label_template_name = 'multiple_labels_walk_up_' + this.type + this.size
+  var label_template_url = baseUrl()+'label_templates?filter[name]=' + label_template_name
+  return label_template_url
+};
 
 PrintJob.prototype.print = function(data){
 	var label_template_id = data['data'][0]['id']
