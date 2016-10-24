@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Print text on labels</title>
+    <link rel='stylesheet' type='text/css' href = 'styles/normalize.css'></link>
+    <link rel='stylesheet' type='text/css' href = 'styles/style.css'></link>
+    <script src ="lib/jquery.js"></script>
+    <script src ="javascripts/Helpers.js"></script>
+    <script src ="javascripts/HandleErrors.js"></script>
+    <script src ="javascripts/PrepareForm.js"></script>
+    <script src ="javascripts/PrintJob.js"></script>
+    <script src ="javascripts/main.js"></script>
+  </head>
+
+  <body>
+
+
+    <form >
+      <h3>Label printer</h3>
+      <div class='result'></div>
+      <div>
+        <label for="printers">Labels for:</label>
+        <select name="type" id="type">
+          <option value="plate">plates</option>
+          <option value="tube">tubes</option>
+        </select>
+      </div>
+      <div>
+        <label for="size">6mm</label>
+        <input type="checkbox" id="cbox" name="size" value="small">
+      </div>
+      <div>
+        <label for="txt">Text:</label>
+        <input type="text" id="text" name="text" required />
+      </div>
+      <div>
+        <label for="barcode">Barcode:</label>
+        <input type="text" id="barcode" name="barcode" />
+      </div>
+      <div>
+        <label for="from">from:</label>
+        <input type="number" id="from" name="from" />
+      </div>
+      <div>
+        <label for="to">to:</label>
+        <input type="number" id="to" name="to" />
+      </div>
+
+      <div>
+        <label for="printer_name">Printer:</label>
+        <select name="printer_name" id="printer_name"></select>
+      </div>
+      <div class="button">
+        <button id="print" type="submit">Print!</button>
+      </div>
+
+    </form>
+
+  </body>
+  </html>
