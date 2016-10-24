@@ -1,0 +1,92 @@
+
+//label_type for tubes
+
+{"data":
+  {"attributes":
+    {"name":"Tube",
+      "feed_value":"008",
+      "fine_adjustment":"22",
+      "pitch_length":"0430",
+      "print_width":"0300",
+      "print_length":"0400"
+    }
+  }
+}
+
+//label template for tubes
+//check label_type_id
+
+{"data":
+  {"attributes":
+    {"name":"multiple_labels_walk_up_tube",
+      "label_type_id": 5,
+      "labels_attributes":[
+        {"name": "main_label",
+          "bitmaps_attributes": [
+            {"x_origin":"0100", "y_origin":"0030", "field_name":"middle_line", "horizontal_magnification":"05", "vertical_magnification":"05", "font":"H", "space_adjustment":"02", "rotational_angles":"11"},
+            {"x_origin":"0240", "y_origin":"0200", "field_name":"round_label", "horizontal_magnification":"05", "vertical_magnification":"1", "font":"G", "space_adjustment":"00", "rotational_angles":"00"}
+          ],
+          "barcodes_attributes"  :  [
+            {"x_origin":"0020", "y_origin":"0300", "field_name":"barcode", "barcode_type":"9", "one_module_width":"02", "height":"0070", "rotational_angle":null, "one_cell_width":null, "type_of_check_digit":null, "bar_height":null, "no_of_columns":null}
+          ]
+        }
+      ]
+    }
+  }
+}
+
+//label_type for plates
+
+{"data" =>
+  {"attributes" =>
+    {"name":"Plate",
+      "feed_value":"008",
+      "fine_adjustment":"04",
+      "pitch_length":"0110",
+      "print_width":"0920",
+      "print_length":"0080"
+    }
+  }
+}
+
+//label template plate
+//check label_type_id
+
+{"data":
+  {"attributes":
+    {"name":"multiple_labels_walk_up_plate",
+      "label_type_id": 1,
+      "labels_attributes":[
+        {"name": "main_label",
+          "bitmaps_attributes" : [
+            {"x_origin":"0030", "y_origin":"0050", "field_name":"middle_line", "horizontal_magnification":"05", "vertical_magnification":"1", "font":"G", "space_adjustment":"00", "rotational_angles":"00"}
+          ],
+          "barcodes_attributes"  :  [
+            {"x_origin":"0300", "y_origin":"0000", "field_name":"barcode", "barcode_type":"9", "one_module_width":"02", "height":"0070", "rotational_angle":null, "one_cell_width":null, "type_of_check_digit":null, "bar_height":null, "no_of_columns":null}
+          ]
+        }
+      ]
+    }
+  }
+}
+
+//label template plate - suitable for small labels
+//check label_type_id
+
+{"data":
+  {"attributes":
+    {"name":"multiple_labels_walk_up_plate_small",
+      "label_type_id": 1,
+      "labels_attributes":[
+        {"name": "main_label",
+          "bitmaps_attributes" : [
+            {"x_origin":"0160", "y_origin":"0050", "field_name":"middle_line", "horizontal_magnification":"05", "vertical_magnification":"1", "font":"G", "space_adjustment":"00", "rotational_angles":"00"}
+          ],
+          "barcodes_attributes"  :  [
+            {"x_origin":"0400", "y_origin":"0010", "field_name":"barcode", "barcode_type":"9", "one_module_width":"02", "height":"0070", "rotational_angle":null, "one_cell_width":null, "type_of_check_digit":null, "bar_height":null, "no_of_columns":null}
+          ]
+        }
+      ]
+    }
+  }
+}
