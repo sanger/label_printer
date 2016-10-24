@@ -7,7 +7,7 @@ var toObject = function(array){
 }
 
 var baseUrl = function(){
-  return 'http://localhost:8080/pmb/'
+  return '/pmb'
 }
 
 var refreshResult = function(){
