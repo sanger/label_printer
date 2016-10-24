@@ -1,4 +1,8 @@
 
+h3 {
+
+}
+
 form {
     width: 400px;
     padding: 1em;
@@ -20,13 +24,15 @@ label {
     text-align: right;
 }
 
-input, select {
+input, select{
 
     width: 300px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-
     border: 1px solid #999;
+    border-radius: .3em;
+    font-family : inherit;
+    font-size   : 100%;
     border-radius: .3em;
 }
 
@@ -38,8 +44,20 @@ input:focus {
 .button {
     padding-left: 90px;
 }
+
 button {
+    font-family : inherit;
+    font-size   : 100%;
+    border-radius: .3em;
+    width: 300px;
+    border: 1px solid #999;
     margin-left: .5em;
+    background-color: #8cd9b3;
+    padding: 3px 6px 3px 6px;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .result {
@@ -48,13 +66,6 @@ button {
     padding-bottom: 5px;
     border-radius: .3em;
     color: #ffffff;
-}
-
-button, input, select {
-  font-family : inherit;
-  font-size   : 100%;
-  border-radius: .3em;
-  background-color: white;
 }
 
 select {
@@ -69,4 +80,8 @@ select {
 #error {
   background-color: #ffcccc;
   color: #800000;
+}
+
+#cbox {
+    width: 30px;
 }

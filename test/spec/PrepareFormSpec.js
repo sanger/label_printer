@@ -5,7 +5,7 @@ describe("PrepareForm", function() {
     loadFixtures( 'AppFixture.html');
     data ={'data': [{'attributes': {'name': 'name1'}}, {'attributes': {'name': 'name2'}}, {'attributes': {'name': 'name3'}}]};
     addPrinters(data);
-    expect($('select>option')).toHaveLength(3);
+    expect($("select[id='printer_name']>option")).toHaveLength(3);
     expect($("#name1")).toHaveText("name1");
     expect($("#name2")).toHaveText("name2");
     expect($("#name3")).toHaveText("name3");
@@ -65,6 +65,23 @@ describe("PrepareForm", function() {
       expect(addPrinters).not.toHaveBeenCalled();
       expect(showErrors).toHaveBeenCalled();
     });
+  });
+
+  it("should hide from and to if barcode is set", function(){
+    loadFixtures( 'AppFixture.html');
+
+    expect($("#from")).toBeVisible();
+    expect($("#to")).toBeVisible();
+
+    var barcode = $('#barcode');
+    barcode.val('12345')
+    barcode.keyup(removeFromAndTo)
+    var event = jQuery.Event("keyup");
+    barcode.trigger(event);
+
+
+    expect($("#from")).toBeHidden();
+    expect($("#to")).toBeHidden();
   });
 
 });

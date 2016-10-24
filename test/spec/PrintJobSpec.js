@@ -3,7 +3,7 @@ describe("PrintJob", function() {
   var label, labels, result, attributes;
 
   beforeEach(function() {
-    data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test'}
+    data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test', 'barcode': ''}
     printJob = new PrintJob(data);
   });
 
@@ -13,25 +13,32 @@ describe("PrintJob", function() {
     expect(printJob.to).toEqual('3');
     expect(printJob.text).toEqual('some_text');
     expect(printJob.printer_name).toEqual('test');
+    expect(printJob.size).toEqual('');
+  });
+
+  it("should have the right size attribute for small label", function(){
+    data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test', 'barcode': '', 'size': 'small'}
+    printJob = new PrintJob(data);
+    expect(printJob.size).toEqual('_small');
   });
 
   it("should create the right label for plate", function(){
     label = printJob.label(1);
-    expect(label).toEqual({"main_label": {"middle_line": 'some_text 1'}});
+    expect(label).toEqual({"main_label": {"middle_line": 'some_text 1', 'barcode': ''}});
   });
 
   it("should create the right label for tube", function(){
     printJob.type = 'tube'
     label = printJob.label(1);
-    expect(label).toEqual({"main_label": {"middle_line": 'some_text 1', "round_label" : '1'}});
+    expect(label).toEqual({"main_label": {"middle_line": 'some_text 1', "round_label" : '1', 'barcode': ''}});
   });
 
   it("should create the right labels", function(){
     labels = printJob.labels();
     result = {'body':
-                [{ 'main_label': { 'middle_line': 'some_text 1' }},
-                 { 'main_label': { 'middle_line': 'some_text 2' }},
-                 { 'main_label': { 'middle_line': 'some_text 3' }}
+                [{ 'main_label': { 'middle_line': 'some_text 1', 'barcode': '' }},
+                 { 'main_label': { 'middle_line': 'some_text 2', 'barcode': '' }},
+                 { 'main_label': { 'middle_line': 'some_text 3', 'barcode': '' }}
                 ]
               }
     expect(labels).toEqual(result);
@@ -45,9 +52,9 @@ describe("PrintJob", function() {
                   "label_template_id" : 5,
                   "labels" :
                     {'body':
-                      [{ 'main_label': { 'middle_line': 'some_text 1' }},
-                       { 'main_label': { 'middle_line': 'some_text 2' }},
-                       { 'main_label': { 'middle_line': 'some_text 3' }}
+                      [{ 'main_label': { 'middle_line': 'some_text 1', 'barcode': ''}},
+                       { 'main_label': { 'middle_line': 'some_text 2', 'barcode': ''}},
+                       { 'main_label': { 'middle_line': 'some_text 3', 'barcode': ''}}
                       ]
                     }
                   }
@@ -169,7 +176,7 @@ describe("PrintJob", function() {
     });
   });
 
-  it("should add id and text to the right element", function(){
+  it("success should add id and text to the right element", function(){
     loadFixtures( 'AppFixture.html');
     printJob.success();
     expect($('.result')).toHaveText("Your labels have been sent to printer");
