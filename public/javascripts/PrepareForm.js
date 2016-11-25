@@ -33,7 +33,35 @@ var removeFromAndTo = function(){
   };
 }
 
+var removeBarcode = function(){
+  if($(this).val().length ==0){
+    $("label[for='barcode']").show();
+    $('#barcode').show();
+  } else {
+    $("label[for='barcode']").hide();
+    $('#barcode').hide().val('');
+  };
+}
+
 var disableCheckboxIfTube = function () {
     $("label[for='size']").prop('hidden', this.value == 'tube');
     $('#cbox').prop('hidden', this.value == 'tube').prop('checked', false);
   }
+
+var removeIrrelevantInputs = function () {
+  if (this.value =='with_barcode') {
+    $("label[for='barcode']").show();
+    $('#barcode').show();
+    $("label[for='from']").hide();
+    $('#from').hide().val('');
+    $("label[for='to']").hide();
+    $('#to').hide().val('');
+  } else {
+    $("label[for='barcode']").hide();
+    $('#barcode').hide().val('');
+    $("label[for='from']").show();
+    $('#from').show();
+    $("label[for='to']").show();
+    $('#to').show();
+  }
+}

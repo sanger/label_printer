@@ -3,9 +3,9 @@ $(document).ready(function() {
 
   getPrinters()
 
-  $('#barcode').keyup(removeFromAndTo)
+  $('#labels_options').change(removeIrrelevantInputs)
 
-  $('#type').change(disableCheckboxIfTube);
+  $('#labware_type').change(disableCheckboxIfTube);
 
   $('form').submit(function(event) {
     refreshResult();

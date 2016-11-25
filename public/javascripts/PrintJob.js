@@ -2,8 +2,9 @@
 PrintJob = function(data){
   this.from = data['from'];
   this.to = data['to'];
+  this.number_of_copies = data['number_of_copies'];
   this.text = data['text'];
-  this.type = data['type'];
+  this.labware_type = data['labware_type'];
   this.printer_name = data['printer_name'];
   this.barcode = data['barcode'];
   this.size = (typeof data['size'] === 'undefined') ? '' : ('_' + data['size']);
@@ -17,13 +18,15 @@ PrintJob.prototype.labels = function(){
   var result  = new Array();
   for (i = this.from; i <= this.to; i++) {
     label = this.label(String(i));
-    result.push(label)
+    for (j = 1; j <= this.number_of_copies; j++) {
+      result.push(label)
+    }
   }
   return {"body" : result}
 };
 
 PrintJob.prototype.label = function(number){
-  switch (this.type) {
+  switch (this.labware_type) {
     case 'plate':
       return this.labelPlate(number);
       break;
@@ -59,7 +62,7 @@ PrintJob.prototype.execute=function(){
 }
 
 PrintJob.prototype.labelTemplateUrl=function(){
-  var label_template_name = 'multiple_labels_walk_up_' + this.type + this.size
+  var label_template_name = 'multiple_labels_walk_up_' + this.labware_type + this.size
   var label_template_url = baseUrl()+'label_templates?filter[name]=' + label_template_name
   return label_template_url
 };
