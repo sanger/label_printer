@@ -1,11 +1,11 @@
 
 $(document).ready(function() {
 
-  getPrinters()
+  formSetup()
 
-  $('#labels_options').change(removeIrrelevantInputs)
-
-  $('#labware_type').change(disableCheckboxIfTube);
+  $('#labels_options').change(removeIrrelevantInputs);
+  $('#labware_type').change(changeFormBasedOnLabwareType);
+  $('#cbox').change(changeBarcodeLengthIfLabelSizeHasChanged);
 
   $('form').submit(function(event) {
     refreshResult();

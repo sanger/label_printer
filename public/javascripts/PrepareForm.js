@@ -1,3 +1,7 @@
+var tubeLabelBarcodeMaxlength = 2;
+var plateLabelBarcodeMaxlength = 17;
+var smallPlateLabelBarcodeMaxlength = 12;
+
 
 var addPrinters = function(data){
   var printers_names = new Array;
@@ -19,49 +23,62 @@ var getPrinters = function(){
   })
 };
 
-var removeFromAndTo = function(){
-  if($(this).val().length ==0){
-    $("label[for='from']").show();
-    $('#from').show();
-    $("label[for='to']").show();
-    $('#to').show();
-  } else {
-    $("label[for='from']").hide();
-    $('#from').hide().val('');
-    $("label[for='to']").hide();
-    $('#to').hide().val('');
-  };
+var hideWalkUpInputs = function(){
+  $("label[for='from']").hide();
+  $('#from').hide().val('');
+  $("label[for='to']").hide();
+  $('#to').hide().val('');
 }
 
-var removeBarcode = function(){
-  if($(this).val().length ==0){
-    $("label[for='barcode']").show();
-    $('#barcode').show();
-  } else {
-    $("label[for='barcode']").hide();
-    $('#barcode').hide().val('');
-  };
+var showWalkUpInputs = function(){
+  $("label[for='from']").show();
+  $('#from').show();
+  $("label[for='to']").show();
+  $('#to').show();
 }
 
-var disableCheckboxIfTube = function () {
-    $("label[for='size']").prop('hidden', this.value == 'tube');
-    $('#cbox').prop('hidden', this.value == 'tube').prop('checked', false);
+var hideBarcodeInput = function(){
+  $("label[for='barcode']").hide();
+  $('#barcode').hide().val('');
+}
+
+var showBarcodeInput = function(){
+  $("label[for='barcode']").show();
+  $('#barcode').show();
+}
+
+var formSetup = function(){
+  $("#labels_options").val('with_barcode')
+  hideWalkUpInputs()
+  $("#labware_type").val('plate')
+  $('#barcode').attr('maxlength', plateLabelBarcodeMaxlength);
+  getPrinters()
+}
+
+var changeFormBasedOnLabwareType = function () {
+  $("label[for='size']").prop('hidden', this.value == 'tube');
+  $('#cbox').prop('hidden', this.value == 'tube').prop('checked', false);
+  if (this.value =='tube') {
+    $('#barcode').attr('maxlength', tubeLabelBarcodeMaxlength)
+  } else {
+    $('#barcode').attr('maxlength', plateLabelBarcodeMaxlength)
   }
+}
+
+var changeBarcodeLengthIfLabelSizeHasChanged = function() {
+  if ($('#cbox').prop('checked')) {
+    $('#barcode').attr('maxlength', smallPlateLabelBarcodeMaxlength)
+  } else {
+    $('#barcode').attr('maxlength', plateLabelBarcodeMaxlength)
+  }
+}
 
 var removeIrrelevantInputs = function () {
   if (this.value =='with_barcode') {
-    $("label[for='barcode']").show();
-    $('#barcode').show();
-    $("label[for='from']").hide();
-    $('#from').hide().val('');
-    $("label[for='to']").hide();
-    $('#to').hide().val('');
+    showBarcodeInput()
+    hideWalkUpInputs()
   } else {
-    $("label[for='barcode']").hide();
-    $('#barcode').hide().val('');
-    $("label[for='from']").show();
-    $('#from').show();
-    $("label[for='to']").show();
-    $('#to').show();
+    hideBarcodeInput()
+    showWalkUpInputs()
   }
 }

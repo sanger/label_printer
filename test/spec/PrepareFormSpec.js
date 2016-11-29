@@ -67,21 +67,38 @@ describe("PrepareForm", function() {
     });
   });
 
-  it("should hide from and to if barcode is set", function(){
+  it("should hide barcode if walk_up option was chosen", function(){
+
     loadFixtures( 'AppFixture.html');
-
-    expect($("#from")).toBeVisible();
-    expect($("#to")).toBeVisible();
-
-    var barcode = $('#barcode');
-    barcode.val('12345')
-    barcode.keyup(removeFromAndTo)
-    var event = jQuery.Event("keyup");
-    barcode.trigger(event);
-
+    formSetup()
 
     expect($("#from")).toBeHidden();
     expect($("#to")).toBeHidden();
+    expect($("#barcode")).toBeVisible();
+
+    var labels_options = $('#labels_options');
+    labels_options.change(removeIrrelevantInputs)
+    labels_options.val('walk_up').change()
+
+    expect($("#from")).toBeVisible();
+    expect($("#to")).toBeVisible();
+    expect($("#barcode")).toBeHidden();
+  });
+
+  it("should hide small size option if tube was chosen", function(){
+    loadFixtures( 'AppFixture.html');
+    formSetup()
+
+    expect($("#cbox")).toBeVisible();
+    expect($("#barcode").attr('maxlength')).toEqual('17');
+
+    var labware_type = $('#labware_type');
+    labware_type.change(changeFormBasedOnLabwareType)
+    labware_type.val('tube').change()
+
+    expect($("#cbox")).toBeHidden();
+    expect($("#barcode").attr('maxlength')).toEqual('2');
+
   });
 
 });
