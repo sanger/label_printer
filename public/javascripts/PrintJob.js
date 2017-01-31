@@ -8,6 +8,7 @@ PrintJob = function(data){
   this.printer_name = data['printer_name'];
   this.barcode = data['barcode'];
   this.size = (typeof data['size'] === 'undefined') ? '' : ('_' + data['size']);
+  this.ean13 = (typeof data['ean13'] === 'undefined') ? '' : ('_' + data['ean13']);
 };
 
 PrintJob.prototype.attributes = function(label_template_id){
@@ -62,7 +63,7 @@ PrintJob.prototype.execute=function(){
 }
 
 PrintJob.prototype.labelTemplateUrl=function(){
-  var label_template_name = 'multiple_labels_walk_up_' + this.labware_type + this.size
+  var label_template_name = 'multiple_labels_walk_up_' + this.labware_type + this.size + this.ean13
   var label_template_url = baseUrl()+'label_templates?filter[name]=' + label_template_name
   return label_template_url
 };

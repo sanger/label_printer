@@ -1,6 +1,6 @@
 var tubeLabelBarcodeMaxlength = 2;
 var plateLabelBarcodeMaxlength = 17;
-var smallPlateLabelBarcodeMaxlength = 12;
+var smallPlateLabelBarcodeMaxlength = 13;
 
 
 var addPrinters = function(data){
