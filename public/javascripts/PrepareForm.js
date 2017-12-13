@@ -56,9 +56,11 @@ var formSetup = function(){
 }
 
 var changeFormBasedOnLabwareType = function () {
-  $("label[for='size']").prop('hidden', this.value == 'tube');
-  $('#cbox').prop('hidden', this.value == 'tube').prop('checked', false);
-  if (this.value =='tube') {
+  $('#small').prop('checked', false);
+  $('#ean13').prop('checked', false);
+  if ($('#labware_type').val() == 'tube') {
+    $("label[for='size']").prop('hidden', true)
+    $('#small').prop('hidden', true)
     $('#barcode').attr('maxlength', tubeLabelBarcodeMaxlength)
   } else {
     $('#barcode').attr('maxlength', plateLabelBarcodeMaxlength)
@@ -66,10 +68,18 @@ var changeFormBasedOnLabwareType = function () {
 }
 
 var changeBarcodeLengthIfLabelSizeHasChanged = function() {
-  if ($('#cbox').prop('checked')) {
+  if (this.checked) {
     $('#barcode').attr('maxlength', smallPlateLabelBarcodeMaxlength)
   } else {
-    $('#barcode').attr('maxlength', plateLabelBarcodeMaxlength)
+    changeFormBasedOnLabwareType();
+  }
+}
+
+var changeBarcodeLengthIfBarcodeTypeChanged = function() {
+  if (this.checked) {
+    $('#barcode').attr('maxlength', '13')
+  } else {
+    changeFormBasedOnLabwareType();
   }
 }
 

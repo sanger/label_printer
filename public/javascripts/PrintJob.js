@@ -8,6 +8,7 @@ PrintJob = function(data){
   this.printer_name = data['printer_name'];
   this.barcode = data['barcode'];
   this.size = (typeof data['size'] === 'undefined') ? '' : ('_' + data['size']);
+  //ean13 on my local for regular plates now is UPC-A (12 digits)
   this.ean13 = (typeof data['ean13'] === 'undefined') ? '' : ('_' + data['ean13']);
 };
 

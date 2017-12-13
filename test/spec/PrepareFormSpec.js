@@ -89,14 +89,14 @@ describe("PrepareForm", function() {
     loadFixtures( 'AppFixture.html');
     formSetup()
 
-    expect($("#cbox")).toBeVisible();
+    expect($("#small")).toBeVisible();
     expect($("#barcode").attr('maxlength')).toEqual('17');
 
     var labware_type = $('#labware_type');
     labware_type.change(changeFormBasedOnLabwareType)
     labware_type.val('tube').change()
 
-    expect($("#cbox")).toBeHidden();
+    expect($("#small")).toBeHidden();
     expect($("#barcode").attr('maxlength')).toEqual('2');
 
   });

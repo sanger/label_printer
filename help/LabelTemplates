@@ -114,6 +114,26 @@
   }
 }
 
+//label template plate with ean13 12-digit barcode (UPC-A)
+//check label_type_id
+
+{"data":
+  {"attributes":
+    {"name":"multiple_labels_walk_up_plate_ean13",
+      "label_type_id": 1,
+      "labels_attributes":[
+        {"name": "main_label",
+          "bitmaps_attributes" : [
+            {"x_origin":"0030", "y_origin":"0050", "field_name":"middle_line", "horizontal_magnification":"05", "vertical_magnification":"1", "font":"G", "space_adjustment":"00", "rotational_angles":"00"}
+          ],
+          "barcodes_attributes"  :  [
+            {"x_origin":"0300", "y_origin":"0000", "field_name":"barcode", "barcode_type":"K", "one_module_width":"02", "height":"0070", "rotational_angle":null, "one_cell_width":null, "type_of_check_digit":"2", "bar_height":null, "no_of_columns":null}
+          ]
+        }
+      ]
+    }
+  }
+}
 
 
 

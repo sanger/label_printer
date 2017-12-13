@@ -5,7 +5,8 @@ $(document).ready(function() {
 
   $('#labels_options').change(removeIrrelevantInputs);
   $('#labware_type').change(changeFormBasedOnLabwareType);
-  $('#cbox').change(changeBarcodeLengthIfLabelSizeHasChanged);
+  $('#small').change(changeBarcodeLengthIfLabelSizeHasChanged);
+  $('#ean13').change(changeBarcodeLengthIfBarcodeTypeChanged);
 
   $('form').submit(function(event) {
     refreshResult();
