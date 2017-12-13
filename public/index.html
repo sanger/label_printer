@@ -20,15 +20,26 @@
       <h3>Label printer</h3>
       <div class='result'></div>
       <div>
-        <label for="printers">Labels for:</label>
-        <select name="type" id="type">
+        <label for="labels_options">Labels:</label>
+        <select name="labels_options" id="labels_options">
+          <option value="walk_up">walk up</option>
+          <option value="with_barcode">with barcode</option>
+        </select>
+      </div>
+      <div>
+        <label for="labware_type">Labels for:</label>
+        <select name="labware_type" id="labware_type">
           <option value="plate">plates</option>
           <option value="tube">tubes</option>
         </select>
       </div>
       <div>
-        <label for="size">6mm</label>
-        <input type="checkbox" id="cbox" name="size" value="small">
+        <label for="size">small</label>
+        <input type="checkbox" id="small" name="size" value="small">
+      </div>
+      <div>
+        <label for="ean13">ean13</label>
+        <input type="checkbox" id="ean13" name="ean13" value="ean13">
       </div>
       <div>
         <label for="txt">Text:</label>
@@ -36,15 +47,19 @@
       </div>
       <div>
         <label for="barcode">Barcode:</label>
-        <input type="text" id="barcode" name="barcode" />
+        <input type="text" id="barcode" name="barcode"/>
       </div>
       <div>
-        <label for="from">from:</label>
-        <input type="number" id="from" name="from" />
+        <label for="from" >from:</label>
+        <input type="number" id="from" name="from" min="1"/>
       </div>
       <div>
-        <label for="to">to:</label>
-        <input type="number" id="to" name="to" />
+        <label for="to" >to:</label>
+        <input type="number" id="to" name="to" min="1"/>
+      </div>
+      <div>
+        <label for="number_of_copies">Number of copies:</label>
+        <input type="number" id="number_of_copies" name="number_of_copies" min="1" value="1" />
       </div>
 
       <div>

@@ -7,7 +7,7 @@ var toObject = function(array){
 }
 
 var baseUrl = function(){
-  return '/pmb'
+  return '/pmb/'
 }
 
 var refreshResult = function(){

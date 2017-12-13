@@ -3,12 +3,12 @@ describe("PrintJob", function() {
   var label, labels, result, attributes;
 
   beforeEach(function() {
-    data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test', 'barcode': ''}
+    data = {'from': '1', 'to': '3', 'text': 'some_text', 'labware_type': 'plate', 'printer_name': 'test', 'barcode': '', 'number_of_copies': '1'}
     printJob = new PrintJob(data);
   });
 
   it("should have attributes", function() {
-    expect(printJob.type).toEqual('plate');
+    expect(printJob.labware_type).toEqual('plate');
     expect(printJob.from).toEqual('1');
     expect(printJob.to).toEqual('3');
     expect(printJob.text).toEqual('some_text');
@@ -17,7 +17,7 @@ describe("PrintJob", function() {
   });
 
   it("should have the right size attribute for small label", function(){
-    data = {'from': '1', 'to': '3', 'text': 'some_text', 'type': 'plate', 'printer_name': 'test', 'barcode': '', 'size': 'small'}
+    data = {'from': '1', 'to': '3', 'text': 'some_text', 'labware_type': 'plate', 'printer_name': 'test', 'barcode': '', 'size': 'small', 'number_of_copies': '1'}
     printJob = new PrintJob(data);
     expect(printJob.size).toEqual('_small');
   });
@@ -28,7 +28,7 @@ describe("PrintJob", function() {
   });
 
   it("should create the right label for tube", function(){
-    printJob.type = 'tube'
+    printJob.labware_type = 'tube'
     label = printJob.label(1);
     expect(label).toEqual({"main_label": {"middle_line": 'some_text 1', "round_label" : '1', 'barcode': ''}});
   });
@@ -39,6 +39,19 @@ describe("PrintJob", function() {
                 [{ 'main_label': { 'middle_line': 'some_text 1', 'barcode': '' }},
                  { 'main_label': { 'middle_line': 'some_text 2', 'barcode': '' }},
                  { 'main_label': { 'middle_line': 'some_text 3', 'barcode': '' }}
+                ]
+              }
+    expect(labels).toEqual(result);
+  });
+
+  it("should create the right number of copies of each label", function(){
+    data = {'from': '', 'to': '', 'text': 'some_text', 'labware_type': 'plate', 'printer_name': 'test', 'barcode': '123', 'number_of_copies': '3'}
+    printJob = new PrintJob(data);
+    labels = printJob.labels();
+    result = {'body':
+                [{ 'main_label': { 'middle_line': 'some_text ', 'barcode': '123' }},
+                 { 'main_label': { 'middle_line': 'some_text ', 'barcode': '123' }},
+                 { 'main_label': { 'middle_line': 'some_text ', 'barcode': '123' }}
                 ]
               }
     expect(labels).toEqual(result);
